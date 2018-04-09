@@ -1,0 +1,36 @@
+
+
+<p>
+  <b>User:</b>
+  <%= @post.user.email %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @post.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @post.content %>
+</p>
+<p>
+  <b>Tags:</b>
+  <% @post.tags.each do|tag|%>
+  <%= tag.name %>
+  <% end%>
+</p>
+<% if current_user.id==@post.user_id %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+    <% end%>
+<h5>Comments</h5>
+<% #abort @comment_tree.inspect%>
+<%= render :partial =>"comments/hcomments",locals: {commentTreeHtml: @commentTreeHtml} %>
+
+<h5>New comment</h5>
+<%#= render partial:"new", collection: @post %>
+
+<%= render :partial =>"comments/comment",locals: {comment: @comment} %>
+
+<%= link_to 'Back', comments_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  slug: MyString
+  post_count: 1
+  user: 
+
+two:
+  name: MyString
+  slug: MyString
+  post_count: 1
+  user: 

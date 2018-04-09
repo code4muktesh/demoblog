@@ -1,0 +1,32 @@
+<h4>Listing posts</h4>
+
+
+
+<% @posts.each do |post| %>
+ <div >
+<h5><%= link_to post.title, post %></h5>
+<ul class="list-inline">
+  <li>Posted At:<%= post.created_at.strftime("%Y-%m-%d")%></li>
+  <li>Tags:<% post.tags.each do|tag|%>
+        <%= tag.name%>&nbsp;
+    <% end%></li>
+    <!--<li>Comment(<%#= post.comment_count||0 %>)</li>-->
+    <li>Author: <%=  post.user.email %></li>
+  <% if current_user.id==post.user_id %>
+  <li>
+  <%=link_to 'Edit', edit_post_path(post) %>
+
+        </li>
+
+  <li><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <%end%>
+  </ul>
+
+  </div>
+    <hr/>
+<% end %>
+
+
+<br />
+
+<%= link_to 'New Post', new_post_path %>

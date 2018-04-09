@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demoblog</title>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.2.min.js"></script>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" href="/" class="brand-logo">DemoBlog</a>
+    <form style="display: inline;
+        position: absolute;
+        margin-left: 20%;
+        width: 60%;" action="/essearch/search">
+      <div class="input-field">
+        <input id="search" type="search" name="q"required>
+        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+        <i class="material-icons">close</i>
+      </div>
+    </form>
+    <ul class="right hide-on-med-and-down" style="margin-top: 12px;">
+      <% if current_user %>
+        <li><%= current_user.email %> <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+      <%else%>
+        <li><a href="/users/sign_in" class="waves-effect waves-light btn orange" style="color:#fff">Login</a></li>
+        <li><a href="/users/sign_up" class="waves-effect waves-light btn green" style="color:#fff">Register</a></li>
+      <% end %>
+    </ul>
+
+    <ul id="nav-mobile" class="sidenav">
+
+      <% if current_user %>
+        <li> <%= current_user.email %>|<%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+      <%else%>
+        <li><a href="/users/sign_in">Login</a></li>
+        <li><a href="/users/sign_up">Register</a></li>
+      <% end %>
+    </ul>
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+
+
+<div class="container" style="min-height: 500px;">
+  <div class="section">
+
+    <!--   Icon Section   -->
+    <div class="row">
+      <div class="col l12 s12 m12">
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </div>
+
+    </div>
+
+  </div>
+  <br><br>
+</div>
+
+<footer class="page-footer orange">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+
+
+      </div>
+
+
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body>
+
+
+</html>

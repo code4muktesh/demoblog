@@ -1,0 +1,11 @@
+Total Found <b><%= @result['hits']['total']%></b> results
+<hr/>
+<%@result['hits']['hits'].each do |post|%>
+  <a href="/posts/<%= post['_source']['id']%>"><h5><%=post['_source']['title']%></h5></a>
+  <p><%=post['_source']['content']%></p>
+<%end %>
+<style>
+  a:hover{
+    color:black;
+  }
+    </style>

@@ -1,0 +1,40 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h4>
+
+      <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+      <%= f.label :category_id %><br />
+      <% #abort @post.tags.inspect%>
+
+      <%= f.collection_select(:category_id, @categories, :id, :name, {:include_blank => "Please select"}) %>
+      <%#= f.collection_select(:category_id, @categories, :id, :name, {:include_blank => "Please select"}, {:class=>'input-field'}) %>
+    </div>
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_area :content %>
+    </div>
+    <div class="field">
+
+      <%# Tag::AS.each do |a_value| %>
+          <%#= f.check_box(:a, { :multiple => true }, a_value) %>
+      <%# end %>
+      <%= f.select(:tags,options_from_collection_for_select(Tag.all, 'id', 'name',@post.tags.collect { |x| x.id }) ,{},:multiple => true)%>
+      <%#= f.select(:tags,Tag.all.collect {|x| [x.name, x.id]} ,{},:multiple => true)%>
+    </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
